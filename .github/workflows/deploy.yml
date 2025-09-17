@@ -1,0 +1,10 @@
+name: (disabled) Deploy to GitHub Pages (legacy)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  noop:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Legacy workflow disabled in favor of official Pages workflow."
