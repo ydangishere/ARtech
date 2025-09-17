@@ -12,4 +12,5 @@ alwaysApply: true
 5. Before any CLI command, request approval and clearly state: purpose, working directory, and write impact. Do not run anything until I approve.  
 6. Always provide step-by-step instructions.  
 7. On push: GitHub must match local exactly. Do not modify local at push time.  
-8. Any unavoidable differences (e.g., lockfile/meta) must be listed explicitly and wait for my approval.  
+8. Any unavoidable differences (e.g., lockfile/meta) must be listed explicitly and wait for my approval
+9. Không vòng vo, luôn tìm cách triệt để.  
