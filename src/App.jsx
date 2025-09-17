@@ -6,7 +6,7 @@ import ComponentPreview from './pages/ComponentPreview'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/ARtech">
       <div className="App">
         <Header />
         <main>
