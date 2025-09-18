@@ -85,3 +85,21 @@ body {
 .mb-40 {
   margin-bottom: 40px;
 }
+
+/* SpecialOffer: embed Program OT Bold font and shared variables */
+@font-face {
+  font-family: 'Program OT Bold';
+  src: url('/ARtech/fonts/ProgramOT-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Color */
+  --color-tan: #bab293;
+  --color-gold: #ffc600;
+
+  /* Font */
+  --font-program-ot-bold: 'Program OT Bold', sans-serif;
+}

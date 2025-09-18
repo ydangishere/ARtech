@@ -1,15 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { components, getCategories } from '../data/components'
+import { getVisibleComponents, getCategories } from '../data/components'
 import ComponentRenderer from '../components/ComponentRenderer'
 
 const Gallery = () => {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const categories = ['All', ...getCategories()]
 
+  const allComponents = getVisibleComponents()
   const filteredComponents = selectedCategory === 'All' 
-    ? components 
-    : components.filter(component => component.category === selectedCategory)
+    ? allComponents 
+    : allComponents.filter(component => component.category === selectedCategory)
 
   return (
     <div className="container">

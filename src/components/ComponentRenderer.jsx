@@ -1,21 +1,15 @@
 import React from 'react'
-import ButtonPrimary from './ButtonPrimary'
-import ButtonSecondary from './ButtonSecondary'
-import SimpleCard from './SimpleCard'
-import TextInput from './TextInput'
-import BasicModal from './BasicModal'
-import SuccessBadge from './SuccessBadge'
 import GameTopBar from './GameTopBar'
+import SpecialOffer from './SpecialOffer'
+import BonusTrack from './BonusTrack'
+import HorizontalNavBar from './HorizontalNavBar'
 
 const ComponentRenderer = ({ componentName, props }) => {
   const components = {
-    ButtonPrimary,
-    ButtonSecondary,
-    SimpleCard,
-    TextInput,
-    BasicModal,
-    SuccessBadge,
-    GameTopBar
+    GameTopBar,
+    SpecialOffer,
+    BonusTrack,
+    HorizontalNavBar
   }
 
   const Component = components[componentName]

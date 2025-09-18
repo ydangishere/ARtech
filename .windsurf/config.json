@@ -1,0 +1,9 @@
+{
+  "quickPrompts": [
+    {
+      "name": "GUARDRAILS",
+      "text": "RULES (strict): Do not change the `components` directory structure; Do not modify or delete component CSS/code without explicit permission; Do everything locally first (push to GitHub only when I explicitly say so); Do not propose solutions that alter file structure, break CSS, or affect local preview; Before any CLI command, request approval and clearly state: purpose, working directory, and write impact. Do not run anything until I approve; Always provide step-by-step instructions; On push, GitHub must match local exactly. Do not modify local at push time; Any unavoidable differences (e.g., lockfile/meta) must be listed explicitly and wait for my approval; Không vòng vo, luôn tìm cách triệt để"
+    }
+  ],
+  "defaultChatPromptPrefix": "RULES (strict): Do not change `components` structure; do not modify/delete component CSS/code; local-first (only push when I say); before any CLI, ask approval and state purpose + working dir + write impact; always step-by-step; on push, remote equals local exactly; list any unavoidable diffs (lockfile/meta) and wait for my approval."
+}

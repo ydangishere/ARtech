@@ -1,0 +1,25 @@
+import React from 'react'
+import styles from './SpecialOffer.module.css'
+
+// SpecialOffer button
+// - Renders a banner-like button with PNG background (passed via props)
+// - Text uses Program OT Bold (declared globally via @font-face in src/index.css)
+// Props:
+//   - text: string (default: 'SPECIAL OFFERS')
+//   - bgSrc: string URL to normal PNG background (required)
+//   - bgHoverSrc: string URL to hover/selected PNG background (optional, defaults to bgSrc)
+//   - selected: boolean to force selected state (applies hover background)
+const SpecialOffer = ({ text = 'SPECIAL OFFERS', bgSrc = '', bgHoverSrc = '', selected = false }) => {
+  const styleVars = {
+    '--bg-url': `url(${bgSrc})`,
+    '--bg-hover-url': `url(${bgHoverSrc || bgSrc})`
+  }
+
+  return (
+    <div className={`${styles.offerUnselect} ${selected ? styles.selected : ''}`} style={styleVars} role="button" aria-label={text}>
+      <div className={styles.specialOffers}>{text}</div>
+    </div>
+  )
+}
+
+export default SpecialOffer

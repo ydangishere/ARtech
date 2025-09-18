@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { components } from '../data/components'
+import { getVisibleComponents } from '../data/components'
 import ComponentRenderer from '../components/ComponentRenderer'
 
 const useQuery = () => {
@@ -11,8 +11,9 @@ const useQuery = () => {
 const Playground = () => {
   const query = useQuery()
   const navigate = useNavigate()
-  const selectedId = query.get('c') || components[0]?.id
-  const selected = components.find(c => c.id === selectedId) || components[0]
+  const visibleComponents = getVisibleComponents()
+  const selectedId = query.get('c') || visibleComponents[0]?.id
+  const selected = visibleComponents.find(c => c.id === selectedId) || visibleComponents[0]
 
   const selectComponent = (id) => {
     const params = new URLSearchParams(window.location.search)
@@ -29,7 +30,7 @@ const Playground = () => {
             Components
           </div>
           <div>
-            {components.map(c => (
+            {visibleComponents.map(c => (
               <button
                 key={c.id}
                 onClick={() => selectComponent(c.id)}

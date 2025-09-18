@@ -3,18 +3,6 @@ import { asset } from '../utils/assets'
 // Component data registry
 export const components = [
   {
-    id: 'button-primary',
-    name: 'Primary Button',
-    description: 'A primary action button with hover effects',
-    category: 'Buttons',
-    component: 'ButtonPrimary',
-    props: {
-      text: 'Click Me',
-      size: 'medium',
-      disabled: false
-    }
-  },
-  {
     id: 'game-topbar',
     name: 'Game Top Bar',
     description: 'A game-like top navigation bar with icons and title',
@@ -33,76 +21,61 @@ export const components = [
     }
   },
   {
-    id: 'button-secondary',
-    name: 'Secondary Button',
-    description: 'A secondary action button',
+    id: 'special-offer',
+    name: 'Special Offer',
+    description: 'Banner button with PNG background and Program OT Bold',
     category: 'Buttons',
-    component: 'ButtonSecondary',
+    component: 'SpecialOffer',
     props: {
-      text: 'Cancel',
-      size: 'medium',
-      disabled: false
+      text: 'SPECIAL OFFERS',
+      // PNG background expected at public/assets/special-offer/bg.png
+      // Using absolute path with Vite base '/ARtech/' for GitHub Pages compatibility
+      bgSrc: '/ARtech/assets/special-offer/bg.png',
+      bgHoverSrc: '/ARtech/assets/special-offer/bg-selected.png',
+      selected: false
     }
   },
   {
-    id: 'card-simple',
-    name: 'Simple Card',
-    description: 'A clean card component with title and content',
-    category: 'Cards',
-    component: 'SimpleCard',
+    id: 'bonus-track',
+    name: 'Bonus Track',
+    description: 'Banner button with PNG background and Program OT Bold',
+    category: 'Buttons',
+    component: 'BonusTrack',
     props: {
-      title: 'Card Title',
-      content: 'This is a simple card component with some content.',
-      image: 'https://via.placeholder.com/300x200'
+      text: 'BONUS TRACK',
+      // PNG background expected at public/assets/bonus-track/bg.png
+      // Using absolute path with Vite base '/ARtech/' for GitHub Pages compatibility
+      bgSrc: '/ARtech/assets/bonus-track/bg.png',
+      bgHoverSrc: '/ARtech/assets/bonus-track/bg-selected.png',
+      selected: false
     }
   },
   {
-    id: 'input-text',
-    name: 'Text Input',
-    description: 'A styled text input with label',
-    category: 'Forms',
-    component: 'TextInput',
+    id: 'horizontal-nav-bar',
+    name: 'Horizontal Nav Bar',
+    description: 'Horizontal scrollable navigation bar with 5 buttons, responsive and touch-friendly',
+    category: 'Navigation',
+    component: 'HorizontalNavBar',
     props: {
-      label: 'Your Name',
-      placeholder: 'Enter your name',
-      value: '',
-      required: true
-    }
-  },
-  {
-    id: 'modal-basic',
-    name: 'Basic Modal',
-    description: 'A simple modal dialog component',
-    category: 'Modals',
-    component: 'BasicModal',
-    props: {
-      title: 'Modal Title',
-      content: 'This is a basic modal dialog.',
-      isOpen: true
-    }
-  },
-  {
-    id: 'badge-success',
-    name: 'Success Badge',
-    description: 'A success status badge',
-    category: 'Badges',
-    component: 'SuccessBadge',
-    props: {
-      text: 'Success',
-      size: 'medium'
+      selectedButton: 'special-store',
+      basePath: '/ARtech/assets/nav-buttons'
     }
   }
 ]
 
 export const getComponentById = (id) => {
-  return components.find(component => component.id === id)
+  return components.find(component => component.id === id && !component.hidden)
 }
 
 export const getComponentsByCategory = (category) => {
-  return components.filter(component => component.category === category)
+  return components.filter(component => component.category === category && !component.hidden)
 }
 
 export const getCategories = () => {
-  const categories = [...new Set(components.map(component => component.category))]
+  const categories = [...new Set(components.filter(c => !c.hidden).map(component => component.category))]
   return categories
+}
+
+export const getVisibleComponents = () => {
+  return components.filter(c => !c.hidden)
 }
