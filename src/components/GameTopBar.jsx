@@ -17,6 +17,9 @@ const GameTopBar = ({
   onMenuClick,
   onProfileClick
 }) => {
+  // GameTopBar chỉ scale theo chiều ngang, không scale theo chiều cao
+  // Giữ cố định chiều cao là ${height}px
+  
   return (
     <div 
       style={{
@@ -28,7 +31,7 @@ const GameTopBar = ({
         maxHeight: `${height}px`,
         display: 'flex',
         alignItems: 'center',
-        padding: '0 12px',
+        padding: '0 clamp(12px, 3.1vw, 36px)', // Padding cũng scale theo viewport, nhưng giữ nguyên ở 390px
         overflow: 'hidden'
       }}
       aria-label="Game top bar"

@@ -1,20 +1,20 @@
 .offerUnselect {
   width: 100%;
   position: relative;
-  height: 48px; /* fixed button height */
+  height: 48px; /* Chiều cao cố định, không scale */
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 21px; /* remove vertical padding so height stays constant */
+  padding: 0 clamp(21px, 5.4vw, 63px); /* Giữ nguyên 21px ở 390px */
   box-sizing: border-box;
   /* Use CSS vars for background switching (normal/hover/selected) */
   background-image: var(--bg-url);
-  /* Scale horizontally only; fix vertical height at 48px */
+  /* Chỉ scale theo chiều ngang, không scale theo chiều dọc */
   background-size: 100% 48px;
   background-repeat: no-repeat;
   background-position: left top;
   text-align: center;
-  font-size: 14px;
+  font-size: clamp(14px, 3.6vw, 42px); /* Giữ nguyên 14px ở 390px */
   color: var(--color-tan, #bab293);
   font-family: var(--font-program-ot-bold, sans-serif);
   letter-spacing: 0.03em;
@@ -34,5 +34,8 @@
   text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
 }
 
-/* Define an empty .selected class so CSS Modules exports styles.selected */
-.selected {}
+/* CSS class for selected state */
+.selected {
+  /* Used for class name reference in JS */
+  box-shadow: none;
+}

@@ -13,15 +13,47 @@ const HorizontalNavBar = ({
   onButtonClick = () => {},
   basePath = '/ARtech/assets/nav-buttons'
 }) => {
-  // Get responsive button size based on available width (container - 24px padding)
-  const getButtonSize = (containerWidth = 0) => {
-    const availableWidth = containerWidth - 24 // 12px padding each side
+  // Get button size based on viewport width
+  const getButtonSize = () => {
+    // Không scale gì từ 390px đến 768px, sau đó mới scale lên đến giá trị max ở 1440px
+    const mobileWidth = 105 // Kích thước cố định cho width từ 390px đến 768px
+    const mobileHeight = 42 // Kích thước cố định cho height từ 390px đến 768px
+    const mobileFontSize = 12 // Kích thước cố định cho font từ 390px đến 768px
     
-    if (availableWidth >= 1440) return { width: 130, height: 48, fontSize: 14 }
-    if (availableWidth >= 1024) return { width: 120, height: 48, fontSize: 13.5 }
-    if (availableWidth >= 768) return { width: 115, height: 46, fontSize: 13 }
-    if (availableWidth >= 600) return { width: 110, height: 44, fontSize: 12.5 }
-    return { width: 105, height: 42, fontSize: 12 }
+    const tabletWidth = 105 // Vẫn giữ nguyên kích thước ở tablet 768px
+    const tabletHeight = 42 // Vẫn giữ nguyên kích thước ở tablet 768px
+    const tabletFontSize = 12 // Vẫn giữ nguyên kích thước ở tablet 768px
+    
+    const desktopWidth = 130 // Kích thước mộc tiêu trên màn hình 1440px
+    const desktopHeight = 48 // Kích thước mộc tiêu trên màn hình 1440px
+    const desktopFontSize = 14 // Kích thước mộc tiêu trên màn hình 1440px
+    
+    // Lấy viewport width hiện tại để quyết định kích thước
+    const viewportWidth = typeof window !== 'undefined' ? window.innerWidth : 390
+
+    // Nếu viewport width nhỏ hơn hoặc bằng 768px, sử dụng kích thước cố định
+    if (viewportWidth <= 768) {
+      return {
+        width: `${mobileWidth}px`,
+        height: `${mobileHeight}px`,
+        fontSize: `${mobileFontSize}px`
+      }
+    } 
+    // Nếu lớn hơn 768px, scale từ tablet đến desktop theo tỷ lệ
+    else {
+      const scaleRatio = Math.min(1, (viewportWidth - 768) / (1440 - 768))
+      const scaledWidth = tabletWidth + (desktopWidth - tabletWidth) * scaleRatio
+      const scaledHeight = tabletHeight + (desktopHeight - tabletHeight) * scaleRatio
+      const scaledFontSize = tabletFontSize + (desktopFontSize - tabletFontSize) * scaleRatio
+      
+      return {
+        width: `${scaledWidth}px`,
+        height: `${scaledHeight}px`,
+        fontSize: `${scaledFontSize}px`
+      }
+    }
+    
+    // Code này không cần vì đã return trước đó rồi
   }
   
   const [buttonSize, setButtonSize] = useState(getButtonSize())
@@ -99,25 +131,20 @@ const HorizontalNavBar = ({
     }
   }, [isDragging, startX, scrollLeft])
 
-  // Handle container resize for responsive scaling
+  // Update button size based on viewport size
   useEffect(() => {
-    const container = scrollContainerRef.current?.parentElement
-    if (!container) return
+    const handleResize = () => {
+      setButtonSize(getButtonSize())
+    }
 
-    const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const containerWidth = entry.contentRect.width
-        setButtonSize(getButtonSize(containerWidth))
-      }
-    })
+    // Set initial size
+    handleResize()
 
-    resizeObserver.observe(container)
+    // Add resize listener
+    window.addEventListener('resize', handleResize)
     
-    // Initial size
-    setButtonSize(getButtonSize(container.offsetWidth))
-
     return () => {
-      resizeObserver.disconnect()
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
 
@@ -146,16 +173,16 @@ const HorizontalNavBar = ({
                 onMouseLeave={handleMouseLeave}
                 style={{
                   backgroundImage: `url(${basePath}/${button.id}/${showSelected ? 'select' : 'unselect'}.png)`,
-                  width: `${buttonSize.width}px`,
-                  height: `${buttonSize.height}px`,
-                  minWidth: `${buttonSize.width}px`
+                  width: buttonSize.width,
+                  height: buttonSize.height,
+                  minWidth: buttonSize.width
                 }}
                 aria-label={button.textLines.join(' ')}
               >
                 <div className={styles.buttonTextContainer}>
                   <span className={styles.buttonTextWrapper}>
                     {button.textLines.map((line, index) => (
-                      <p key={index} className={styles.textLine} style={{fontSize: `${buttonSize.fontSize}px`}}>{line}</p>
+                      <p key={index} className={styles.textLine} style={{fontSize: buttonSize.fontSize}}>{line}</p>
                     ))}
                   </span>
                 </div>

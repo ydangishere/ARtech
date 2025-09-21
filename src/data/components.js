@@ -3,6 +3,14 @@ import { asset } from '../utils/assets'
 // Component data registry
 export const components = [
   {
+    id: 'header-title',
+    name: 'Header Title',
+    description: 'A header title with PNG background that scales horizontally',
+    category: 'Headers',
+    component: 'HeaderTitle',
+    props: {}
+  },
+  {
     id: 'game-topbar',
     name: 'Game Top Bar',
     description: 'A game-like top navigation bar with icons and title',

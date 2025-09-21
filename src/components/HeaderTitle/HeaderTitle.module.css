@@ -1,0 +1,46 @@
+.headerTitle {
+  width: 366px;
+  position: relative;
+  height: 28px;
+  margin: 0 auto;
+}
+
+/* Màn hình từ 391px đến 1439px - scale dần dần theo tỷ lệ */
+@media screen and (min-width: 391px) and (max-width: 1439px) {
+  .headerTitle {
+    width: calc(366px + (458.72 - 366) * ((100vw - 390px) / (1440 - 390)));
+    height: calc(28px + (35.09 - 28) * ((100vw - 390px) / (1440 - 390)));
+  }
+}
+
+/* Màn hình 1440px trở lên - kích thước cố định */
+@media screen and (min-width: 1440px) {
+  .headerTitle {
+    width: 458.72px;
+    height: 35.09px;
+  }
+}
+
+.headerTitle1 {
+  width: 100%;
+  height: 100%; /* Độ cao 100% theo container để scale theo */
+  object-fit: contain;
+}
+
+.specialStore {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.03em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+  font-family: 'Program OT Bold';
+  font-weight: bold;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 16px;
+}
